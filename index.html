@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="main">
+	<head>
+		<meta charset="UTF-8">
+		<title>Template Convertor</title>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
+		<link rel="stylesheet" href="froala/css/froala_editor.css">
+		<link rel="stylesheet" href="froala/css/froala_style.css">
+		<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+		<link rel="stylesheet" href="assets/css/main.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+		<script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+	</head>
+	<body ng-controller="MainController">
+		<div id="header"></div>
+		<div id="maincontent">
+			<div id="leftbar">
+				<div class="editor" id="editor">
+					<div id="toolbarContainer"></div>
+					<div id="myDivToPrint"></div>
+				</div>
+			</div>
+			<div id="rightbar">
+				<div class="container-fluid">
+					<div class="col-md-12" style="padding-top: 15px;">
+						<div class="form-group" ng-hide="showSetting">
+							<input type="text" class="form-control" placeholder="Enter File Path" id="inputFilePath" ng-model='fileName' style="margin-bottom: 20px;">
+							<input type="button" class="form-control btn btn-primary" value="submit" id="submitFilePath" ng-click="submitFile()">
+						</div>
+						
+						<div ng-show="showSetting" class="form-group">
+							<input type="button" value="Get Variables" class="form-control btn btn-danger" ng-click="submitFor()">
+						</div>
+						<div ng-show="showSetting" class="form-group">
+							<input type="button" value="Download Source" class="form-control btn btn-danger" ng-click="downloadSource()">
+						</div>
+						<div ng-show="showPublish" class="form-group">
+							<table class="table-responsive" style="margin-bottom: 20px;">
+								<tr ng-repeat="(key, value) in dataNeeded">
+									<td> {{key}}: </td> 
+									<td class="form-group"> <input type="text" ng-model="dataNeeded[key]" class="form-control"></td>
+								</tr>
+							</table>
+							<input type="button" ng-click="publish()" class="form-control" value="Publish">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		    <div class="modal-dialog modal-lg">
+		        <div class="modal-content">
+		        	<div class="modal-header">
+				        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		                <button type="button" id="Print" style="float: left;" class="btn btn-primary">Print</button>
+
+				        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+				      </div>
+		            <div id="printThis" class="modal-body">
+		               	
+		            </div>
+		            <div class="modal-footer">
+		                <button type="button" id="Print" class="btn btn-primary">Print</button>
+		            </div>
+		        </div>
+		    </div>
+		</div>
+		
+		<script src="bower_components/jquery/dist/jquery.min.js"></script>
+		<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+		<script src="bower_components/handlebars/handlebars.min.js"></script>
+		<script type="text/javascript" src="froala/js/froala_editor.min.js"></script>
+		<script src="lib/templates.js"></script>
+		<script src="lib/main.js"></script>
+		<script>
+			$('.edit').froalaEditor('toolbar.hide');
+			$('.edit').on('froalaEditor.click', function (e, editor, clickEvent) {
+				$('.edit').froalaEditor('toolbar.hide');
+				$(this).froalaEditor('toolbar.show');
+			});
+				$('.edit').on('froalaEditor.blur', function (e, editor) {
+				$(this).froalaEditor('toolbar.hide');
+			});
+			document.getElementById("Print").onclick = function () {
+				printElement(document.getElementById("printThis"));
+			};
+
+			function printElement(elem) {
+				var domClone = elem.cloneNode(true);
+
+				var $printSection = document.getElementById("printSection");
+
+				if (!$printSection) {
+				var $printSection = document.createElement("div");
+				$printSection.id = "printSection";
+				document.body.appendChild($printSection);
+				}
+
+				$printSection.innerHTML = "";
+				$printSection.appendChild(domClone);
+				window.print();
+			}
+			
+		</script>
+		<!-- Modal -->
+		
+
+	</body>
+</html>

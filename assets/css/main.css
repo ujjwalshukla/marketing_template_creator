@@ -1,0 +1,112 @@
+@media screen {
+    #printSection {
+        display: none;
+    }
+}
+@media print {
+    body * {
+        visibility:hidden;
+    }
+    #printSection, #printSection * {
+        visibility:visible;
+    }
+    #printSection {
+        position:absolute;
+        left:0;
+        top:0;
+    }
+}
+body {
+  background: rgb(204,204,204); 
+  text-align: center;
+  margin:0;
+  padding: 0;
+}
+
+page {
+  background: white;
+  display: block;
+  margin: 0 auto;
+  margin-bottom: 0.8cm;
+  box-shadow: 0 0 0.5cm rgba(0,0,0,0.5);
+}
+
+page[size="A4"] {  
+  width: 21cm;
+  height: 29.7cm; 
+}
+
+page[size="A4"][layout="portrait"] {
+  width: 29.7cm;
+  height: 21cm;  
+}
+page[size="A3"] {
+  width: 29.7cm;
+  height: 42cm;
+}
+page[size="A3"][layout="portrait"] {
+  width: 42cm;
+  height: 29.7cm;  
+}
+page[size="A5"] {
+  width: 14.8cm;
+  height: 21cm;
+}
+page[size="A5"][layout="portrait"] {
+  width: 21cm;
+  height: 14.8cm;  
+}
+@media print {
+  body, page {
+    margin: 0;
+    box-shadow: 0;
+  }
+}
+
+section {
+  margin: auto;
+  text-align: left;
+}
+
+#toolbarContainer{
+  position: fixed;
+  top: 50px;
+  left: 0;
+  right: 76px;
+  z-index: 100;
+}
+
+#editor{
+  margin-top: 80px;
+  overflow-y: scroll;
+}
+
+#header{
+  background: white;
+  height:50px;
+  position: fixed;
+  top:0;
+  left:0;
+  right:0;
+  z-index: 200;
+  box-shadow: 0 0 4px rgba(0,0,0,0.5);
+}
+#leftbar{
+  margin-right:76px;
+}
+
+#rightbar{
+  background: white;
+  position: fixed;
+  right:0;
+  bottom: 0;
+  top:50px;
+  width: 250px;
+  z-index: 100;
+  box-shadow: 0 0 4px rgba(0,0,0,0.3);
+}
+.fr-toolbar{
+  border-top: 0px;
+  padding-top: 4px;
+  background: #efefef;
+}
