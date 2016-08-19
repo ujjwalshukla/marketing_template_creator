@@ -110,3 +110,6 @@ section {
   padding-top: 4px;
   background: #efefef;
 }
+div>a[href="https://froala.com/wysiwyg-editor"] {
+  visibility: hidden;
+}
